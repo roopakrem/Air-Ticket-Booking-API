@@ -1,0 +1,45 @@
+digraph "ER Diagram - Air Ticket Booking System" {
+	rankdir=BT size=10
+	User [label="User
+user_id (PK)
+username
+email
+password
+role (enum: User/Service Provider)" shape=record]
+	ServiceProvider [label="ServiceProvider
+provider_id (PK)
+name
+type
+contact_info
+logo" shape=record]
+	Flight [label="Flight
+flight_id (PK)
+provider_id (FK)
+departure
+arrival
+departure_time
+arrival_time
+price
+seat_capacity" shape=record]
+	Booking [label="Booking
+booking_id (PK)
+user_id (FK)
+flight_id (FK)
+booking_date
+status (enum)" shape=record]
+	Payment [label="Payment
+payment_id (PK)
+booking_id (FK)
+amount
+payment_date
+status (enum)" shape=record]
+	User -> Booking [label="One-to-Many"]
+	User -> Payment [label="One-to-Many"]
+	ServiceProvider -> Flight [label="One-to-Many"]
+	ServiceProvider -> Booking [label="One-to-Many"]
+	Flight -> Booking [label="One-to-Many"]
+	Flight -> ServiceProvider [label="Many-to-One"]
+	Booking -> User [label="Many-to-One"]
+	Booking -> Flight [label="Many-to-One"]
+	Booking -> Payment [label="One-to-One"]
+}
